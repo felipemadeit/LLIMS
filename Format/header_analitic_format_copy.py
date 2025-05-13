@@ -1,10 +1,10 @@
 from Utils.copy_excel_range import copy_excel_range
 
 
-def header_format_copy(source_wb, destiny_wb, source_sheet_name, destination_row):
-    header_range = "A1:AQ9"
+def header_analitic_format_copy(source_wb, destiny_wb, source_sheet_name, destination_row):
+    header_range = "A1:AQ1"
     destination_cell = f"A{destination_row}"
-    last_row = destination_row + 9
+    last_row = destination_row + 2
 
     try:
         # Asegurarnos de tener los objetos Worksheet correctos

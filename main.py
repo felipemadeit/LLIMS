@@ -1,5 +1,7 @@
 from openpyxl.reader.excel import load_workbook
 
+from Format.footer_format_copy import footer_format_copy
+from Format.header_analitic_format_copy import header_analitic_format_copy
 from Format.header_format_copy import header_format_copy
 from Format.lab_format_copy import lab_format_copy
 from Read.excel_chain_data_reader import excel_chain_data_reader
@@ -34,18 +36,25 @@ def read_data():
     chain_data = excel_chain_data_reader(wb_to_read, file_path, [23, 23])
 
     matrix_data = matrix_data_reader(wb_to_read, chain_data)
-    
-    print(matrix_data)
 
-    last_row = header_format_copy(wb_to_format,wb_to_print,  wb_to_format["Header"])
+    last_row = header_format_copy(wb_to_format,wb_to_print,  wb_to_format["Header"], 1)
 
     write_header_data(wb_to_print,header_data)
 
     lab_format_copy(wb_to_format, wb_to_print, wb_to_format["Header_lab"], last_row, 20)
-
-    write_lab_data(wb_to_print, matrix_data, last_row, client_sample_id)
+    last_row=write_lab_data(wb_to_print, matrix_data, last_row, client_sample_id)
+    
+    footer_format_copy(wb_to_format, wb_to_print, "Footer", last_row)
+    print(f"PUTA ROOW PARA EL FOOTER {last_row}")
+    
+    last_row = header_format_copy(wb_to_format,wb_to_print,  wb_to_format["Header"], last_row + 7)
+    
+    header_analitic_format_copy(wb_to_format, wb_to_print, "header_analitic", last_row)
+    
+    
     set_height_for_all_rows(wb_to_print["Reporte"], 100, 1, None)
     apply_font_to_worksheet(wb_to_print["Reporte"])
+    
     wb_to_print.save(path_file_write)
 
 read_data()

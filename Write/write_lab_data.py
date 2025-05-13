@@ -34,6 +34,7 @@ def write_lab_data(wb, data: list, start_row, client_sample_id):
                 sheet_to_write[f"AC{start_row}"].value = analysis_requested
 
                 start_row += 1
+        return start_row + 2
 
     except Exception as ex:
         print(f"Error: {ex}")

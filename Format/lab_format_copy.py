@@ -58,7 +58,7 @@ def lab_format_copy(source_wb, destiny_wb, source_sheet, last_row, times_to_prin
                 raise Exception(message or "Error al copiar bloque")
 
         print("¡Formatos copiados exitosamente!")
-        return True
+        return start_row + 21
 
     except Exception as e:
         print(f"Error en lab_format_copy: {str(e)}")
